@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style type="text/css">
+        #c1 {
+            overflow: hidden;
+        }
+        #c1 p{
+            width: 200px;
+        }
+        .f{
+            float: left;
+        }
+        #p11{
+            margin-bottom: -9999px;
+            padding-bottom: 9999px;
+            background-color: red;
+        }
+        #p12{
+            margin-bottom: -9999px;
+            padding-bottom: 9999px;
+            background-color: blue;
+        }
+
+        #c2{
+            display: table-row;
+            border: 10px solid black;
+        }
+        #p21{
+            width: 200px;
+            display: table-cell;
+            background-color: red;
+        }
+        #p22{
+            width: 200px;
+            display: table-cell;
+            background-color: green;
+        }
+
+        #c3{
+            display: flex;
+        }
+        #c3 p{
+            flex: 1;
+        }
+        #p31{
+            flex: 1;
+            background-color: red;
+        }
+        #p31{
+            flex: 1;
+            background-color: green;
+        }
+
+    </style>
+</head>
+<body>
+<p>margin-bottom和padding-bottom</p>
+<div id="c1">
+    <p id="p11" class="f">
+        hello<br>
+        hello<br>
+        hello<br>
+    </p>
+    <p id="p12" class="f">World</p>
+</div>
+<p>table-row与table-cell</p>
+<div id="c2">
+    <p id="p21">
+        hello<br/>
+
+        hello<br/>
+
+        hello<br/>
+
+        hello
+
+    </p>
+    <p id="p22">W3School</p>
+</div>
+<p>flex</p>
+<div id="c3">
+    <p id="p31">
+        hello<br/>
+
+        hello<br/>
+
+        hello<br/>
+
+        hello
+
+    </p>
+
+    <p id="p32">world</p>
+</div>
+
+</body>
+</html>

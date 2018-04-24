@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 016ref</title>
+    <style type="text/css">
+        body{
+            font:20px bold 微软雅黑 sans-serif;
+        }
+        div{
+            width: 400px;
+            height: 50px;
+            margin: 20px auto;
+        }
+        select{
+            font:20px bold 微软雅黑 sans-serif;
+        }
+        #address{
+            width: 280px;
+            height:30px;
+
+        }
+        .outerCLass{
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+<div>
+    <input id="inner" type="radio" name="student" checked="checked"/><label for="inner">在校生</label>
+    <span>&nbsp; &nbsp;</span>
+    <input id="outer" type="radio" name="student"/><label for="outer">非在校生</label>
+</div>
+<div class="innerClass">
+    <label for="province">省份:</label>
+    <select id="province">
+        <option>北京</option>
+        <option>上海</option>
+        <option>天津</option>
+        <option>杭州</option>
+    </select>
+    <span>&nbsp;&nbsp; </span>
+    <label for="college">学校:</label>
+    <select id="college">
+        <option>北京大学</option>
+        <option>清华大学</option>
+        <option>中国人民大学</option>
+        <option>北京示范大学</option>
+    </select>
+</div>
+<div class="outerCLass">
+    <label for="address">地址:</label>
+    <input id="address" />
+</div>
+<script type="text/javascript">
+    window.onload=function(){
+        var inner = document.getElementById('inner');
+        var outer = document.getElementById('outer');
+        var innerDiv = document.getElementsByClassName('innerClass')[0];
+        var outerDiv = document.getElementsByClassName('outerCLass')[0];
+        var provinceSel = document.getElementById('province');
+        var collegeSel = document.getElementById('college');
+
+        inner.onchange = function(){
+            innerDiv.style.display = 'block';
+            outerDiv.style.display = 'none';
+        }
+        outer.onchange = function(){
+            innerDiv.style.display = 'none';
+            outerDiv.style.display = 'block';
+        }
+
+        provinceSel.onchange = function(){
+            collegeListDefine(provinceSel.value);
+        }
+
+        function collegeListDefine(a){
+            collegeSel.options.length = 0;
+            switch(a){
+                case "北京":
+                    collegeSel.add(new Option("北京大学"));
+                    collegeSel.add(new Option("清华大学"));
+                    collegeSel.add(new Option("中国人民大学"));
+                    collegeSel.add(new Option("北京示范大学"));
+                    break;
+                case "上海":
+                    collegeSel.add(new Option("复旦大学"));
+                    collegeSel.add(new Option("上海交通s大学"));
+                    collegeSel.add(new Option("同济大学"));
+                    collegeSel.add(new Option("华东师范大学"));
+                    break;
+                case "天津":
+                    collegeSel.add(new Option("天津大学"));
+                    collegeSel.add(new Option("南开大学"));
+                    collegeSel.add(new Option("河海大学"));
+                    collegeSel.add(new Option("中国医科大学"));
+                    break;
+                case "杭州":
+                    collegeSel.add(new Option("浙江大学"));
+                    collegeSel.add(new Option("浙江工业大学"));
+                    collegeSel.add(new Option("浙江以客大学"));
+                    collegeSel.add(new Option("浙江工商大学"));
+                    break;
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

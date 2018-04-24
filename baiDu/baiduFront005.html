@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front 005</title>
+    <style type="text/css">
+        *{
+            box-sizing:border-box;
+            padding: 0px;
+            font-family: 微软雅黑 Arial;
+            margin: 20px;
+        }
+        .base{
+            width: 100%;
+            height: 480px;
+            background-color: #eee;
+            border: 1px solid #999;
+        }
+        /*position可以认为是定位，而float不能说是定位。
+        float能让元素从文档流中抽出，它并不占文档流的空间，典型的就是图文混排中文字环绕图片的效果。并且float业务hi目前
+        使用最多的网页布局方式了。
+        position顾名思义就是定位。它有如下几个属性：static relative absolute和fixed。其中static和relative会占据文档流
+        空间，他们并不会脱离文档。absolute和fixed是脱离文档流的，不会占据文档流的空间
+        比较可以发现，float和position最大的区别就是是否占据文档流的空间的问题。虽然position中有absolute和fixed这两个同样
+        不会占据文档流的属性，但是这两个属性并不适合用来给网页做布局。因为这样你就得为页面上的每一个元素设定一个xy的坐标定位。
+        float布局就灵活地多了。但是一些特殊的地方搭配relative和absolute布局可以实现更好的效果。因为absolute是基于父级元素
+        的定位，当父级元素是relative时，absolute元素就是给予他的定位了。比如你可以让一个按钮始终显示在一个元素的右下角。
+        总结一句就是不推荐用position来布局整个页面的大框架，而推荐用float或者文档流的默认方式。
+        */
+        /*
+        使用css布局网页，那是前端的基本功了，什么两栏布局，三栏布局，也是前端面试的基本题目。一般来说，可以使用CSSposition
+        属性进行布局，或者使用CSSfloat属性布局。前者适合于首页布局，因为首页上的内容可以安全控制。后者适合布局模板，模板中
+        填充的内容你没法控制。
+        */
+        .leftColumn{
+            width: 200px;
+            height:120px;
+            float:left;
+            background-color: white;
+            border: 1px solid #999;
+        }
+        .rightColumn{
+            width: 120px;
+            height:440px;
+            float:right;
+            background-color: white;
+            border: 1px solid #999;
+            position: relative;
+
+        }
+        .middleColumn{
+            margin-left: 240px;
+            margin-right: 160px;
+            background-color: white;
+            border: 1px solid #999;
+        }
+        .leftColumn .teamLogo{
+            width: 160px;
+            height: 80px;
+            position: relative;
+        }
+        .leftColumn .teamLogo img{
+            position: absolute;
+            top:-20px;
+            left:-20px;
+            width: 80px;
+            height:80px;
+            overflow: auto;
+        }
+        .leftColumn span{
+            position:absolute;
+            top:-10px;
+            left: 80px;
+            width: 80px;
+        }
+        ul{
+            position: absolute;
+            left:-40px;
+            top:-20px;
+            height: 480px;
+        }
+        li{
+            list-style-type: none;
+        }
+        li a img{
+            width: 80px;
+            height:80px;
+            overflow: auto;
+            margin: 0px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="base">
+    <div class="leftColumn">
+        <div class="teamLogo">
+            <img src="http://tb1.bdstatic.com/tb/cms/ngmis/file_1484902802789.jpg">
+            <span>团队名称</span>
+        </div>
+
+    </div>
+    <div class="rightColumn">
+        <ul>
+            <li><a href=""><img src="https://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/mms-res/fed/ife/ife_tutor/htmlcss.ec85cad580b3bfce.jpg"></a> </li>
+            <li><a href=""><img src="https://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/mms-res/fed/ife/ife_tutor/js.f2c13892b01f749f.jpg"></a> </li>
+            <li><a href=""><img src="https://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/mms-res/fed/ife/ife_tutor/zonghe.7ec42bde1c5ae76c.jpg"> </a> </li>
+            <li><a href=""><img src="http://gss0.baidu.com/9rkZbzqaKgQUohGko9WTAnF6hhy/mms-res/fed/ife/ife_tutor/%E5%95%86%E4%B8%9A%E5%B9%B3%E5%8F%B0%E9%83%A8.2fdd58e22952a70e.jpg"></a> </li>
+        </ul>
+    </div>
+    <div class="middleColumn">
+        <h2>2017年学期概述</h2>
+        <p>百度前端技术学院是一个为大学生创办的免费的前端技术实践、分享、交流平台。由百度校园招聘组、百度校园品牌部、百度前端技术部以及多个百度的前端团队联合创办。</p>
+        <p>学院组织了一批百度在职工程师，精心编写了数十个实践编码任务，将技术知识点系统有机地串联在各个充满趣味与挑战的任务中，同学们通过实际地编码练习来掌握知识，再辅以互相评价、学习笔记等方式，加深对于学习内容的理解。</p>
+        <p>在过去的三年中，百度前端技术学院累积吸引了上万名同学参加，并且有数十名同学在学习后，顺利加入了百度，成为了百度的前端工程师。</p>
+        <p>2017年新学期，我们在保留原有的已经经历过实践历练的模式下，又加入了更多的工程师导师资源，以及新的内容，希望能够帮助有志于通过技术改变生活的同学们掌握到希望学到的技术。</p>
+        <p>新学期报名从即日起到3月15日，整个学期会进行到4月24日，期待大家的踊跃参加！</p>
+    </div>
+
+</div>
+
+</body>
+</html>

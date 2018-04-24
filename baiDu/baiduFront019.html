@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 019</title>
+    <style type="text/css">
+        div{
+            margin: 0;
+            padding: 0;
+        }
+        .chessBox{
+            margin: 40px auto;
+            width:420px;
+            height:420px;
+            border:2px solid black;
+            position: relative;
+        }
+        .cell{
+            float:left;
+            width: 40px;
+            height:40px;
+            border:1px solid #cccccc;
+        }
+        .control{
+            width: 300px;
+            margin: 20px auto;
+        }
+        .control input{
+            margin-right: 20px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="chessBox">
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+</div>
+<div class="control">
+    <input type="text" id="direction"/><button id="controlBtn">控制</button>
+</div>
+<script type="text/javascript">
+    window.onload = function(){
+        var chessBox = document.getElementsByClassName('chessBox')[0];
+        var inputTxt = document.getElementById('direction');
+        var btnControl = document.getElementById('controlBtn');
+
+        //alert(chessBox);
+        function chessPiece(x, y, orientNum){
+            if(x<0){
+                this.x = 0;
+            }else if(x>9){
+                this.x = 9;
+            }else{
+                this.x = x;
+            }
+            if(y<0){
+                this.y = 0;
+            }else if(y>9){
+                this.y = 9;
+            }else{
+                this.y = y;
+            }
+            var chessDiv = document.createElement('div');
+            this.orientNum = orientNum;
+            this.show = function(){
+                chessDiv.style.position ="absolute";
+                chessDiv.style.width = 40 + "px";
+                chessDiv.style.height = 40 + "px";
+                chessDiv.style.left = this.x * 42 + 1 + "px";
+                chessDiv.style.top = this.y*42 + 1 + "px";
+                chessDiv.style.background = "red";
+                chessBox.appendChild(chessDiv);
+                var adjustNum1 = this.orientNum%360;
+                var adjustNum2 = adjustNum1<0?adjustNum1+360:adjustNum1;
+                //alert(adjustNum2);
+                if(adjustNum2>=0&&adjustNum2<90){
+                    chessDiv.style.border = "1px solid red";
+                    chessDiv.style.borderTop = "4px solid blue";
+                }else if(adjustNum2>=90&&adjustNum2<180){
+                    chessDiv.style.border = "1px solid red";
+                    chessDiv.style.borderRight = "4px solid blue";
+                }else if(adjustNum2>=180&&adjustNum2<270){
+                    chessDiv.style.border = "1px solid red";
+                    chessDiv.style.borderBottom = "4px solid blue";
+                }else if(adjustNum2>=270&&adjustNum2<360){
+                    chessDiv.style.border = "1px solid red";
+                    chessDiv.style.borderLeft = "4px solid blue";
+                }
+            }
+            this.go = function(){
+                var adjustNum1 = this.orientNum%360;
+                var adjustNum2 = adjustNum1<0?adjustNum1+360:adjustNum1;
+                //alert(adjustNum2);
+                if(adjustNum2>=0&&adjustNum2<90){
+                    this.y = this.y -1;
+                    if(this.y<0) {
+                        this.y=0;
+                    }
+                    this.show();
+                }else if(adjustNum2>=90&&adjustNum2<180){
+                    this.x = this.x + 1;
+                    if(this.x >9){
+                        this.x = 9;
+                    }
+                    this.show();
+                }else if(adjustNum2>=180&&adjustNum2<270){
+                    this.y = this.y + 1;
+                    if(this.y >9){
+                        this.y = 9;
+                    }
+                    this.show();
+                }else if(adjustNum2>=270&&adjustNum2<360){
+                    this.x = this.x -1;
+                    if(this.x <0){
+                        this.x = 0;
+                    }
+                    this.show();
+                }
+            }
+            this.right = function(){
+                this.orientNum = this.orientNum +90;
+                this.show();
+            }
+            this.left = function(){
+                this.orientNum = this.orientNum -90;
+                this.show();
+            }
+            this.back = function () {
+                this.orientNum = this.orientNum + 180;
+                this.show();
+            }
+
+        }
+
+        var oneChessPiece = new chessPiece(parseInt(Math.random()*10),parseInt(Math.random()*10),parseInt(Math.random()*360));
+        oneChessPiece.show();
+
+        btnControl.onclick = function(){
+            var directive = inputTxt.value.toLowerCase();
+            if(directive ===''){
+                alert("请输入控制指令！");
+            }else if(directive === 'go'){
+                oneChessPiece.go();
+            }else if(directive === 'left'){
+                oneChessPiece.left();
+            }else if(directive === 'right'){
+                oneChessPiece.right();
+            }else if(directive === 'back'){
+                oneChessPiece.back();
+            }else{
+                inputTxt.value = "";
+                alert("请输入正确的指令！");
+            }
+        }
+
+
+
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE Javascript Tast 03</title>
+</head>
+<body>
+<ul id="source">
+    <li>北京空气质量：<b>90</b></li>
+    <li>上海空气质量：<b>70</b></li>
+    <li>天津空气质量：<b>80</b></li>
+    <li>广州空气质量：<b>50</b></li>
+    <li>深圳空气质量：<b>50</b></li>
+    <li>福州空气质量：<b>32</b></li>
+    <li>成都空气质量：<b>93</b></li>
+    <li>重庆空气质量：<b>45</b></li>
+    <li>哈尔滨空气质量：<b>45</b></li>
+    <li>呼和浩特空气质量：<b>74</b></li>
+</ul>
+<br>
+================================================
+<br>
+<ul id="sort">
+
+</ul>
+<br>
+================================================
+<br>
+<button type="button" id="sort-btn">排序</button>
+<script type="text/javascript">
+    /**
+     * getData方法，获取其中的城市名字及城市对应的空气质量
+     * 返回一个数组
+     */
+    function getData() {
+        var sourceUl = document.getElementById('source');
+        var sourceLis = sourceUl.getElementsByTagName('li');
+        var dataList = [];
+        for(var i=0;i<sourceLis.length;i++){
+            var con = sourceLis[i].innerHTML;
+            var cityName = con.slice(0,con.indexOf("空气"));
+            var beingIndex = con.indexOf("<b>")+3;
+            var endIndex = con.indexOf("</b>");
+            var cityIndex = parseInt(con.slice(beingIndex,endIndex));
+            /*var cityIndex = parseInt(con.getElementsByTagName('b')[0].innerHTML);
+            alert(cityIndex);*/
+
+            dataList.push([cityName,cityIndex]);
+
+        }
+        //alert(dataList);
+        return dataList;
+    }
+    
+    function sortData(data) {
+        data.sort(function (a, b) { return b[1] - a[1]; });
+        return data;
+    }
+
+    function render(data) {
+        var sortedUl = document.getElementById("sort");
+        for (var i = 0; i < data.length; i++) {
+            var eleLi = document.createElement('li');
+            eleLi.innerHTML = data[i][0] + ": " + data[i][1];
+            sortedUl.appendChild(eleLi);
+        }
+    }
+
+    function btnHandler(){
+        var aqiData = getData();
+        aqiData = sortData(aqiData);
+        render(aqiData);
+        var button = document.getElementById("sort-btn");
+        button.disabled ='true';
+    }
+
+    function init(){
+        //alert("aaaa");
+        var button = document.getElementById('sort-btn');
+        button.onclick = function(){
+            btnHandler();
+        }
+
+    }
+
+    init();
+</script>
+</body>
+</html>

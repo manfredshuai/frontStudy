@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 018</title>
+    <style type="text/css">
+        div{
+            margin: 20px;
+            border: 1px solid black;
+            float: left;
+        }
+
+    </style>
+</head>
+<body>
+<div id="root">
+    <div>
+        <div>
+            <div style="width: 80px;height: 50px"></div>
+            <div style="width: 80px;height: 50px"></div>
+        </div>
+        <div>
+            <div style="width: 80px;height: 50px"></div>
+            <div style="width: 80px;height: 50px"></div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div style="width: 80px;height: 50px"></div>
+            <div style="width: 80px;height: 50px"></div>
+        </div>
+        <div>
+            <div style="width: 80px;height: 50px"></div>
+            <div style="width: 80px;height: 50px"></div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <button type="button">前序遍历</button>
+    <button type="button">中序遍历</button>
+    <button type="button">后序遍历</button>
+</div>
+<script type="text/javascript">
+    window.onload = function(){
+        var root = document.getElementById('root');
+        var btnPreOrder =document.getElementsByTagName('button')[0];
+        var btnInOrder =document.getElementsByTagName('button')[1];
+        var btnPostOrder =document.getElementsByTagName('button')[2];
+        var timer = 0;
+
+
+        btnPreOrder.onclick = function(){
+            timer =0;
+            preOrder(root);
+        };
+        btnInOrder.onclick = function(){
+            timer =0;
+            inOrder(root);
+        };
+        btnPostOrder.onclick = function(){
+            timer=0;
+            postOrder(root);
+        }
+
+
+        function showNode(node){
+            node.style.background = "#FFFFFF";
+            setTimeout(function(){
+                node.style.background = "#ff524a";
+            },timer+=100);
+            setTimeout(function(){
+                node.style.background = "#FFFFFF";
+            },timer+=100);
+        }
+
+        function preOrder(root){
+            if(root){
+                showNode(root);
+                preOrder(root.children[0]);
+                preOrder(root.children[1]);
+            }
+        }
+
+        function inOrder(root){
+            if(root){
+                inOrder(root.children[0]);
+                showNode(root);
+                inOrder(root.children[1]);
+            }
+        }
+
+        function postOrder(root){
+            if(root){
+                postOrder(root.children[0]);
+                postOrder(root.children[1]);
+                showNode(root);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

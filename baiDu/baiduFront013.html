@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 013</title>
+    <style type="text/css">
+        #numberList li {
+            list-style: none;
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+            float: left;
+            margin-top: 10px;
+            margin-right: 20px;
+            background-color: green;
+            color: #3c3c3c;
+            height: 30px;
+            padding:0 5px 0 5px;
+        }
+    </style>
+</head>
+<body>
+<label for="inputValue">请输入数字：</label><input id="inputValue" type="text"/>
+<button id="leftIn">左侧入</button>
+<button id="rightIn">右侧入</button>
+<span> &nbsp;&nbsp;&nbsp;&nbsp;</span>
+<button id="leftOut">左侧出</button>
+<button id="rightOut">右侧出</button>
+<ul id="numberList">
+    <!--<li>22</li>
+    <li>22</li>
+    <li>22</li>
+    <li>22</li>-->
+</ul>
+<script type="text/javascript">
+    var oUl = document.getElementById('numberList');
+    var inputValue = document.getElementById('inputValue');
+    var btnLeftIn = document.getElementById('leftIn');
+    var btnRightIn = document.getElementById('rightIn');
+    var btnLeftOut = document.getElementById('leftOut');
+    var btnRightOut = document.getElementById('rightOut');
+
+    function getNumber(){
+        var numArray = [];
+        var arrayLi = oUl.getElementsByTagName('li');
+        for(var i=0;i<arrayLi.length;i++){
+            var temp = arrayLi[i].innerHTML;
+            numArray.push(parseInt(temp));
+        }
+        return numArray;
+    }
+
+
+    function render(numArray){
+        oUl.innerHTML = "";
+        for(var i=0;i<numArray.length;i++){
+            var newLi = document.createElement('li');
+            newLi.innerHTML = numArray[i];
+
+            oUl.appendChild(newLi);
+
+        }
+        oUl.addEventListener("click",function(){
+            oUl.removeChild(event.target);
+        });
+    }
+
+    function leftInAct(){
+        var arrayNum = getNumber();
+        var inputNum = inputValue.value;
+        if(inputNum===""){
+            alert("输入不能为空！");
+            return;
+        }else if(isNaN(inputNum)){
+            alert("请输入数字");
+            inputValue.value = "";
+            return;
+        }
+        arrayNum.unshift(inputNum);
+        inputValue.value = "";
+        render(arrayNum);
+    }
+
+    function rightInAct(){
+        var arrayNum = getNumber();
+        var inputNum = inputValue.value;
+        if(inputNum===""){
+            alert("输入不能为空！");
+            return;
+        }else if(isNaN(inputNum)){
+            alert("请输入数字");
+            inputValue.value = "";
+            return;
+        }
+
+        arrayNum.push(inputNum);
+        inputValue.value = "";
+        render(arrayNum);
+    }
+
+    function leftOutAct(){
+        var arrayNum = getNumber();
+        alert(arrayNum.shift());
+        render(arrayNum);
+    }
+
+    function rightOutAct(){
+        var arrayNum = getNumber();
+        alert(arrayNum.pop());
+        render(arrayNum);
+    }
+
+
+    function init(){
+        btnLeftIn.addEventListener('click',leftInAct);
+        btnRightIn.addEventListener('click',rightInAct);
+        btnLeftOut.addEventListener('click', leftOutAct);
+        btnRightOut.addEventListener('click',rightOutAct);
+    }
+
+    init();
+</script>
+</body>
+
+</html>

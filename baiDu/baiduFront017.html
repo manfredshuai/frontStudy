@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 017</title>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding:0;
+            font-family: 微软雅黑;
+        }
+        div{
+            width: 800px;
+            margin: 40px auto;
+
+        }
+        .presentDiv{
+            width:1280px;
+        }
+        .presentDiv div{
+            background-color: #9acfea;
+            margin-right: 10px;
+            float:left;
+            width: 200px;
+            height: auto;
+            word-break: break-all;
+            color:green;
+            border:1px solid green;
+        }
+    </style>
+
+</head>
+<body>
+<div class="inputAreaDiv">
+    <textarea class="inputArea" rows="5" cols="90"></textarea><br/>
+</div>
+<div class="controlDiv">
+    <button id="leftIn" type="button">左侧入</button><span>&nbsp;&nbsp;&nbsp;</span>
+    <button id="rightIn" type="button">右侧入</button><span>&nbsp;&nbsp;&nbsp;</span>
+    <button id="leftOut" type="button">左侧出</button><span>&nbsp;&nbsp;&nbsp;</span>
+    <button id="rightOut" type="button">右侧出</button><span>&nbsp;&nbsp;&nbsp;</span>
+    <input id="searchStr" type="text"/><span>&nbsp;&nbsp;&nbsp;</span>
+    <button id="search" type="button">搜索</button>
+</div>
+<div class="presentDiv">
+
+</div>
+<script type="text/javascript">
+    window.onload= function(){
+        var inputArea = document.getElementsByClassName('inputArea')[0];
+        var presentDiv = document.getElementsByClassName('presentDiv')[0];
+
+        var btnLeftIn = document.getElementById('leftIn');
+        var btnRightIn = document.getElementById("rightIn");
+        var btnLeftOut = document.getElementById('leftOut');
+        var btnRightOut = document.getElementById('rightOut');
+        var searchStr = document.getElementById('searchStr');
+        var btnSearch = document.getElementById("search");
+
+        btnLeftIn.onclick = function(){
+            leftInClick();
+        }
+
+        btnRightIn.onclick = function(){
+            rightInClick();
+        }
+
+        btnLeftOut.onclick = function(){
+            leftOutClick();
+        }
+
+        btnRightOut.onclick = function(){
+            rightOutClick();
+        }
+
+        presentDiv.onclick = function(){
+            if(event.target){
+                presentDiv.removeChild(event.target);
+            }
+        }
+
+        btnSearch.onclick = function(){
+            searchResult();
+        }
+
+        function leftInClick(){
+            var content = inputArea.value;
+            if(content===''){
+                alert("输入不能为空！");
+                return;
+            }else{
+                var contentDiv = document.createElement('div');
+                contentDiv.innerHTML = content;
+                inputArea.value ="";
+                var arrayDivs = presentDiv.getElementsByTagName('div');
+                presentDiv.insertBefore(contentDiv, arrayDivs[0]);
+            }
+        }
+
+        function rightInClick(){
+            var content = inputArea.value;
+            if(content ===""){
+                alert("输入不能为空！");
+                return;
+            }else{
+                var contentDiv = document.createElement('div');
+                contentDiv.innerHTML = content;
+                inputArea.value = "";
+                presentDiv.appendChild(contentDiv);
+            }
+        }
+
+        function leftOutClick(){
+            var arrayDivs = presentDiv.getElementsByTagName('div');
+            if(arrayDivs[0]){
+                arrayDivs[0].parentNode.removeChild(arrayDivs[0]);
+            }
+        }
+
+        function rightOutClick(){
+            var arrayDivs = presentDiv.getElementsByTagName('div');
+            if(arrayDivs[arrayDivs.length-1]){
+                arrayDivs[arrayDivs.length-1].parentNode.removeChild(arrayDivs[arrayDivs.length-1]);
+            }
+        }
+
+        function searchResult(){
+            var targetStr = searchStr.value;
+            if(targetStr ===""){
+                alert("请输入查询内容！");
+                return;
+            }else{
+                var arrayDivs = presentDiv.getElementsByTagName('div');
+                for(var i=0;i<arrayDivs.length;i++){
+                    var txtContent = arrayDivs[i].innerHTML;
+                    if(txtContent.indexOf(targetStr)>-1){
+                        arrayDivs[i].style.color = 'red';
+                        arrayDivs[i].style.borderColor = "red";
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

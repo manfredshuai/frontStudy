@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE Javascript Task 06</title>
+    <style type="text/css">
+        .base{
+            width:1400px;
+            height: 260px;
+            border: solid 2px #0f0f0f;
+            display: flex;
+            flex-direction: row;
+            margin: 20px;
+        }
+        .layer1{
+            width:650px;
+            height:240px;
+            border:solid 2px #0f0f0f;
+            margin: 5px;
+            display: flex;
+            flex-direction: row;
+        }
+        .layer2{
+            width:150px;
+            height:220px;
+            border:solid 2px #0f0f0f;
+            margin: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+        .layer3{
+            width: 100px;
+            height: 80px;
+            border: solid 2px #0f0f0f;
+            margin: 5px;
+        }
+        #query{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="base" id="wrapper">F1总冠军
+    <div class="layer1">layer1
+        <div class="layer2">layer2_1
+            <div class="layer3">汉密尔顿</div>
+            <div class="layer3">罗斯伯格</div>
+            <div class="layer3">巴顿</div>
+        </div>
+        <div class="layer2">animal
+            <div class="layer3">老虎</div>
+            <div class="layer3">狮子</div>
+            <div class="layer3">狐狸</div>
+            <div class="layer3">野猫</div>
+            <div class="layer3">狍子</div>
+        </div>
+    </div>
+    <div class="layer1">transportation
+        <div class="layer2">aviation
+            <div class="layer3">Fighter</div>
+            <div class="layer3">bomber</div>
+            <div class="layer3">F-22</div>
+            <div class="layer3">F-35</div>
+            <div class="layer3">J-20</div>
+        </div>
+        <div class="layer2">ship
+            <div class="layer3">Carrier</div>
+            <div class="layer3">BattleShip</div>
+            <div class="layer3">Cruiser</div>
+            <div class="layer3">Shooter</div>
+        </div>
+        <div class="layer2">Ground
+            <div class="layer3">Tanker</div>
+            <div class="layer3">Missile</div>
+            <div class="layer3">Soldier</div>
+            <div class="layer3">Truck</div>
+        </div>
+    </div>
+
+</div>
+<div id="query">
+    <input type="text" id="queryInput">
+    <input type="button" id="preOrder" value="前序遍历">
+    <input type="button" id="postOrder" value="后序遍历">
+</div>
+
+<script type="text/javascript">
+    //存放遍历出来的DOM树节点
+    var orderQueue = [];
+    var inAnimation = false;
+
+    //前序遍历查询
+    function preOrder(root){
+        orderQueue.push(root);
+        for(var i=0; i<root.childElementCount;i++){
+            if(root.children[i]!=null){
+                preOrder(root.children[i]);
+            }
+        }
+    }
+
+    //后序遍历查询
+    function postOrder(root){
+        for(var i=0; i<root.childElementCount;i++){
+            if(root.children[i]!=null){
+                postOrder(root.children[i]);
+            }
+        }
+        orderQueue.push(root);
+    }
+
+    function render(queryWord){
+        if(inAnimation){
+            alert('in animation');
+            return;
+        }
+        inAnimation = true;
+        var i=0;
+        orderQueue[i].style.backgroundColor = 'green';
+        var rowSet = setInterval(function(){
+            i++;
+            if(i>=orderQueue.length){
+                clearInterval(rowSet);
+                orderQueue[orderQueue.length-1].style.backgroundColor = '#fff';
+                alert("未找到查询内容！");
+                inAnimation = false;
+                return;
+            }
+
+            orderQueue[i-1].style.backgroundColor = "#fff";
+            orderQueue[i].style.backgroundColor = "green";
+
+            if(orderQueue[i].childNodes[0].nodeValue.search(queryWord)!=-1){
+                alert("找到查询内容！");
+                clearInterval(rowSet);
+                inAnimation = false;
+                return;
+            }
+        },500);
+    }
+
+    function resetBackgroundColor(){
+        for(var i=0; i<orderQueue.length;i++){
+            orderQueue[i].style.backgroundColor ="#fff";
+        }
+    }
+
+    function validateInput(){
+        var input = document.getElementById('queryInput').value;
+        if(input===""){
+            alert("输入为空！");
+            return 1;
+        }
+        return 0;
+    }
+
+    var rootNode = document.getElementById('wrapper');
+    window.onload = function(){
+        document.getElementById('preOrder').onclick = function(){
+            var input = document.getElementById('queryInput').value;
+
+            resetBackgroundColor();
+            if(validateInput()){
+                return;
+            }
+
+            preOrder(rootNode);
+            render(input);
+        }
+
+    }
+</script>
+</body>
+</html>

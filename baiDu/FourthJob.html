@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE Javascript Tast 04</title>
+    <style type="text/css">
+        #queue{
+            margin-top: 20px;
+        }
+        #queue span{
+            padding: 5px;
+            color:white;
+            background-color: red;
+            margin-left: 4px;
+        }
+    </style>
+</head>
+<body>
+<h1>队列测试</h1>
+<p>
+    <input type="text" id="number_input">
+</p>
+<div class="btn">
+    <button type="button" id="left-in" onclick="leftIn()">左侧入</button>
+    <button type="button" id="left-out" onclick="leftOut()">左侧出</button>
+    <button type="button" id="right-in" onclick="rightIn()">右侧入</button>
+    <button type="button" id="right-out" onclick="rightOut()">右侧出</button>
+</div>
+<div id="queue">
+    <span>10</span>
+    <span>3</span>
+    <span>7</span>
+    <span>12</span>
+    <span>11</span>
+    <span>30</span>
+</div>
+<script type="text/javascript">
+    var oQueue = document.getElementById('queue');
+    var spanList = oQueue.getElementsByTagName('span');
+    var inputValue = document.getElementById('number_input');
+
+    oQueue.addEventListener("click",function(e){
+        if(event.target.nodeName.toLowerCase()=='span'){
+            oQueue.removeChild(event.target);
+        }
+    });
+
+    function getData(){
+        /**
+         * 以数组形式返回当前队列中的数字，
+         */
+        var numberList=[];
+        for(var i=0;i<spanList.length;i++){
+            numberList.push(parseInt(spanList[i].innerHTML));
+        }
+        return numberList;
+    }
+
+    function writeData(numberList){
+        /**
+         * 将传入的数组依次写入queue中
+         */
+        /*for(var i=0;i<spanList.length;i++){
+            spanList[i].innerHTML = numberList[i];
+        }*/
+        var size = numberList.length;
+        oQueue.innerText = "";
+        for(var i=0;i<size;i++){
+            var oSpan =document.createElement('span');
+            oSpan.innerHTML = numberList[i];
+            oQueue.appendChild(oSpan);
+        }
+    }
+
+    function inputNum(inputNumber){
+        if(inputNumber.value==""){
+            alert("请输入数字！");
+            return "-1";
+        }else if(!isNaN(inputNumber.value)){
+            /*isNaN() 函数用于检查其参数是否是非数字值。
+            如果参数值为 NaN 或字符串、对象、undefined等非数字值则返回 true, 否则返回 false*/
+            return parseInt(inputNumber.value);
+        }else{
+            alert("格式不对，请重新输入一个数字！");
+            return "-1";
+        }
+    }
+
+    function leftIn(){
+        var numberList = getData();
+
+        var num = inputNum(inputValue);
+        if(num !== "-1"){
+            numberList.pop();
+            numberList.unshift(num);
+            writeData(numberList);
+        }
+        inputValue.value="";
+    }
+
+    function leftOut() {
+        var numberList = getData();
+        var num = numberList.shift();
+        alert(num);
+        writeData(numberList);
+        inputValue.value="";
+    }
+    
+    function rightIn() {
+        var numberList = getData();
+        var num = inputNum(inputValue);
+        if(num !=="-1"){
+            numberList.shift();
+            numberList.push(num);
+            writeData(numberList);
+        }
+        inputValue.value = "";
+    }
+
+    function rightOut(){
+        var numberList = getData();
+        var num = numberList.pop();
+        alert(num);
+        writeData(numberList);
+        inputValue.value="";
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE Javascript Task 02</title>
+
+</head>
+<body>
+<h3>污染城市列表</h3>
+
+<ul id="aqi-list">
+    <!--
+    污染城市列表，按照数值从大到小排列
+    -->
+</ul>
+<script type="text/javascript">
+    var aqiData = [
+        ["北京",90],
+        ["上海",50],
+        ["福州",20],
+        ["广州",50],
+        ["天津",90],
+        ["武汉",100],
+        ["重庆",93],
+        ["深圳",80],
+        ["哈尔滨",67],
+        ["长春",60]
+    ];
+    (function(){
+        //过滤出污染指数超过60的城市
+        alert("aaaaa");
+        var list = [];
+        for(var i=0;i<aqiData.length;i++){
+            if(aqiData[i][1]>=60){
+                list.push(aqiData[i]);
+            }
+        }
+
+        //按照污染指数进行排序
+        list.sort(function (a, b) { return a[1]>b[1] });
+
+        list.reverse();
+
+        //添加li元素
+        var oUl = document.getElementById("aqi-list");
+        for(var i=0;i<list.length;i++){
+            var ele = document.createElement('li');
+            ele.innerHTML = "城市名称：" + list[i][0]  +"==="+ "\t" + "污染指数为：" + list[i][1];
+            oUl.appendChild(ele);
+        }
+    })();
+</script>
+</body>
+</html>

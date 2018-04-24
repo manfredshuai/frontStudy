@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front 003</title>
+</head>
+
+<body>
+<h3>污染城市列表</h3>
+<ul id="aqi-list">
+
+</ul>
+<script type="text/javascript">
+var aqiData=[
+    ["北京",90],
+    ["上海",78],
+    ["天津",92],
+    ["郑州",67],
+    ["武汉",75],
+    ["呼和浩特",100],
+    ["银川",89],
+    ["长春",90]
+];
+
+(function(){
+    function bubbleSorted(dataList){
+        for(var i=0;i<dataList.length-1; i++){
+            for(var j=i;j<dataList.length-1-i;j++){
+                if(dataList[j+1][1]<dataList[j][1]){
+                    var temp = dataList[j+1];
+                    dataList[j+1] =dataList[j];
+                    dataList[j] = temp;
+
+                }
+            }
+        }
+    }
+    var oUl = document.getElementById('aqi-list');
+
+    bubbleSorted(aqiData);
+    aqiData.reverse();
+    alert(aqiData.length);
+    for(var i=0;i<aqiData.length;i++){
+        var oli = document.createElement('li');
+        oli.innerHTML = "城市：" + aqiData[i][0] + "=====" + "污染指数：" + aqiData[i][1];
+        //alert(oli.innerHTML);
+        oUl.appendChild(oli);
+    }
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo1</title>
+    <style type="text/css">
+        .box-set:before,.box-set:after{
+            content: "";
+            display: table;
+        }
+        .box-set:after{
+            clear: both;
+        }
+        .box-set{
+            background-color: #e8e8e8;
+            /*overflow: hidden;*/
+        }
+        .box{
+            position: relative;
+            background-color: red;
+            height: 100px;
+            width: 200px;
+            margin: 10px;
+            float: left;
+            /*float相当地给力，但是还是存在着一定的问题。最典型的问题就是一个父元素包括多个浮动的子元素。页面的内容设置了
+            一个宽度，子元素的浮动确定了他的位置，但浮动元素不会影响父元素的宽度。但是会影响到父元素的高度，让父元素的高度
+            塌陷为0，以及忽略其他的属性.有如下集中方法来处理这个问题：
+            1、使用overflow属性。在具有浮动元素的父容器中设置overflow的属性为auto或者hidden。
+            2、清除浮动更好的方式是用clearfix，在父元素上使用":before"和":after"两个伪类。我们使用这两个伪类，可以在
+            浮动元素的父容器前面和后面创建隐藏元素
+            */
+        }
+        span{
+            width: 40px;
+            height: 50px;
+            background-color: yellow;
+            position: absolute;
+            top:99px;
+        }
+        .box-set1{
+            background-color: #e8e8e8;
+        }
+        .box1{
+            position:relative;
+            width: 80px;
+            height:80px;
+            background-color: red;
+            top:10px;
+            left:20px;
+        }
+        /*行多情况下，你需要控制更多的元素位置，而且超出了浮动所能提供的范围，这个时候我们就需要发挥
+        position属性的作用了。position提供了五个不同的属性值，每种不同的方式可以给元素提供不同的位置
+        1、static position的默认属性就是static，这意味着没有也不接受位置属性设置（top right bottom
+        left位置属性设定）。另外如果元素设置了positions属性，将会覆盖元素默认的static属性。
+        2、relative 和static最主要的区别就是可以给元素设置位移“top，right，bottom，left“属性。通过
+        这些属性设置可以给元素进行精准地定位。这些属性的设置让元素从默认位置移动。
+        3、absulute 绝对定位元素会脱离文档流。绝对定位元素直接从文档流中抽离，绝对定位元素的位置直接与
+        父容器是否设定了相对/绝对定位有直接关系。绝对定位元素需要至少一个主线元素设置了相对定位（绝对定位）
+        不然元素定位会相对于页面的主体进行定位。
+        4、fixed 和绝对定位很类似，但是他定位的是相对于浏览器的窗口，并且不会随着浏览器的滚动而滚动。
+
+        固定页头和页脚
+        footer{
+            position:fixed;
+            bottom:0;
+            left:0;
+            right:0;
+        }
+
+        在页面上要改变元素的层叠顺序，通过z-index属性来设置。元素的z-index值越高，就会显示的月上面。
+        */
+    </style>
+</head>
+<body>
+<div class="box-set">
+    <div class="box"><span>Box 1</span></div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+</div>
+============================================================<br>
+<div class="box-set1">
+    <div class="box1">box 1</div>
+    <div class="box1">box 2</div>
+    <div class="box1">box 3</div>
+</div>
+
+</body>
+</html>

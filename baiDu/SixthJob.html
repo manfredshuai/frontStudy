@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE Javascript Task 06</title>
+    <link href="css/job6.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="BST" id="root">
+    <div class="second">
+        <div class="third">
+            <div class="fourth"></div>
+            <div class="fourth"></div>
+        </div>
+        <div class="third">
+            <div class="fourth"></div>
+            <div class="fourth"></div>
+        </div>
+    </div>
+    <div class="second">
+        <div class="third">
+            <div class="fourth"></div>
+            <div class="fourth"></div>
+        </div>
+        <div class="third">
+            <div class="fourth"></div>
+            <div class="fourth"></div>
+        </div>
+    </div>
+</div>
+<div class="control">
+    <input type="button" value="先序遍历" id="preOrder">
+    <input type="button" value="中序遍历" id="inOrder">
+    <input type="button" value="后序遍历" id="postOrder">
+</div>
+<script>
+    var root = document.getElementById('root');
+    var btnPreOrder = document.getElementById('preOrder');
+    var btnInOrder = document.getElementById('inOrder');
+    var btnPostOrder = document.getElementById('postOrder');
+
+    var timer = 0;
+    function showNode(node){
+        node.style.background = "#ffffff";
+        setTimeout(function(){
+            node.style.background = "#ff524a";
+        },timer+=50);
+        setTimeout(function(){
+            node.style.background = "#ffffff";
+        },timer+=50);
+    }
+
+    function preOrder(root) {
+        if(root){
+            showNode(root);
+            preOrder(root.children[0]);
+            preOrder(root.children[1]);
+        }
+    }
+    btnPreOrder.addEventListener("click",function(){
+        preOrder(root);
+        timer = 0;
+    },false);
+
+    function inOrder(root){
+        if(root){
+            inOrder(root.children[0]);
+            showNode(root);
+            inOrder(root.children[1]);
+        }
+    }
+    btnInOrder.addEventListener("click",function(){
+        inOrder(root);
+        timer = 0;
+    },false);
+
+    function postOrder(root){
+        if(root){
+            postOrder(root.children[0]);
+            postOrder(root.children[1]);
+            showNode(root);
+        }
+    }
+    btnPostOrder.addEventListener("click",function(){
+        postOrder(root);
+        timer = 0;
+    },false);
+</script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 011</title>
+    <style type="text/css">
+        form{
+            width: 600px;
+            box-shadow: 1px 2px 3px #938e8c;
+            padding: 30px;
+            margin: 40px auto;
+        }
+        table{margin: 40px auto;}
+        td{
+            height: 30px;
+        }
+        label{
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            text-align: right;
+            font:normal 16px 微软雅黑;
+            margin-right: 1em;
+        }
+        input{
+            display: inline-block;
+            width: 380px;
+            height: 30px;
+            border-radius: 4px;
+        }
+        #btn{
+            margin-left: 70px;
+            height: 40px;
+            background-color: #9acfea;
+            color: white;
+            font:normal 24px 黑体；
+
+        }
+        .tip{
+            display: inline-block;
+            margin-left: 80px;
+            width: 380px;
+            height: 30px;
+            font: normal 14px 微软雅黑;
+            text-align: left;
+        }
+    </style>
+
+</head>
+<body>
+<form action="#" method="post">
+   <table>
+       <tr><td><label for="username">名称</label></td><td><input type="text" id="username"/></td></tr>
+       <tr><td colspan="2"><label class="tip" id="nameTip"></label></td> </tr>
+
+       <tr><td><label for="passwd">密码</label></td><td><input type="password" id="passwd"/></td></tr>
+       <tr><td colspan="2"><label class="tip" id="passwdTip"></label></td> </tr>
+
+       <tr><td><label for="rePasswd">密码确认</label></td><td><input type="password" id="rePasswd"/></td></tr>
+       <tr><td colspan="2"><label class="tip" id="rePassWdTip"></label></td> </tr>
+
+       <tr><td><label for="mailbox">邮箱</label></td><td><input type="text" id="mailbox"/></td></tr>
+       <tr><td colspan="2"><label class="tip" id="mailboxTip"></label></td> </tr>
+
+       <tr><td><label for="phone">手机</label></td><td><input type="text" id="phone"/></td></tr>
+       <tr><td colspan="2"><label class="tip" id="phoneTip"></label></td> </tr>
+
+       <tr><td colspan="2"><input id="btn" type="submit" value="提交"/> </td></tr>
+   </table>
+</form>
+<script type="text/javascript">
+    var input_name = document.getElementById('username');
+    var nameTip = document.getElementById('nameTip');
+    var input_passwd = document.getElementById('passwd');
+    var passwdTip = document.getElementById('passwdTip');
+    var input_repasswd = document.getElementById("rePasswd");
+    var rePasswdTip = document.getElementById('rePassWdTip');
+    var input_mailbox= document.getElementById('mailbox');
+    var mailboxTip = document.getElementById('mailboxTip');
+    var input_phone = document.getElementById('phone');
+    var phoneTip = document.getElementById('phoneTip');
+    var submitBtn = document.getElementById('btn');
+
+    function init(){
+        input_name.addEventListener("focus", function(){
+            nameTip.innerHTML = "必填!长度为4-16个字符。"
+        });
+
+        input_name.addEventListener("blur", nameBlur);
+
+        input_passwd.addEventListener("focus", function(){
+            passwdTip.innerHTML = "请输入密码！"
+        });
+
+        input_passwd.addEventListener("blur", passwdBlur);
+
+        input_repasswd.addEventListener("focus", function () {
+            rePasswdTip.innerHTML = "请再次输入密码！"
+        });
+
+        input_repasswd.addEventListener("blur", rePasswdBlur);
+
+        input_mailbox.addEventListener("focus", function(){
+            mailboxTip.innerHTML = "请输入邮箱地址！"
+        });
+
+        input_mailbox.addEventListener("blur", mailboxBlur);
+
+        input_phone.addEventListener("focus",function () {
+            phoneTip.innerHTML = "请收入您的手机号!"
+        });
+
+        input_phone.addEventListener("blur", phoneBlur);
+
+        submitBtn.addEventListener("click", checkAll);
+    }
+
+    function nameBlur() {
+        var nameStr = input_name.value;
+        if(nameStr.length===0){/*输入为空字符串*/
+            input_name.style.border = "1px solid red";
+            nameTip.style.color = "red";
+            nameTip.innerHTML = "名称输入不能为空！";
+            return false;
+        } else if(nameStr.length<2 || nameStr.length>16){/*输入字符小于两个或者多余16个*/
+            input_name.style.border = "1px solid red";
+            nameTip.style.color = "red";
+            nameTip.innerHTML = "名称输入不能为空！";
+            nameTip.innerHTML ="输入名称字符不能小于两个或者大于16个字符！"
+            return false;
+        } else {
+            input_name.style.border = "1px solid green";
+            nameTip.style.color = "green";
+            nameTip.innerHTML = "验证通过!";
+            return true;
+        }
+    }
+    function  passwdBlur() {
+        var passwdStr = input_passwd.value;
+        if(passwdStr.length ===0){
+            input_passwd.style.border = "1px solid red";
+            passwdTip.style.color = "red";
+            passwdTip.innerHTML ="密码不能为空";
+            return false;
+        }else if(passwdStr.length<4){
+            alert(passwdStr.length);
+            input_passwd.style.border = "1px solid red";
+            passwdTip.style.color = "red";
+            passwdTip.innerHTML ="密码位数太少！";
+            return false;
+        } else{
+            input_passwd.style.border = "1px solid green";
+            passwdTip.style.color = "green";
+            passwdTip.innerHTML = "验证通过!";
+            return true;
+        }
+
+
+
+    }
+    function rePasswdBlur() {
+        var passwdStr = input_passwd.value;
+        var rePasswdStr = input_repasswd.value;
+        /*alert(passwdStr === rePasswdStr);*/
+        if(passwdStr === rePasswdStr){
+            input_repasswd.style.border = "1px solid green";
+            rePasswdTip.style.color = "green";
+            rePasswdTip.innerHTML = "验证通过";
+            return true;
+        }else{
+            input_repasswd.style.border = "1px solid red";
+            rePasswdTip.style.color = "red";
+            rePasswdTip.innerHTML = "两次密码输入不一样，请重新输入！";
+            return false;
+        }
+    }
+
+    function mailboxBlur(){
+        var mailboxStr = input_mailbox.value;
+        var eReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+        if(mailboxStr.length===0){
+            input_mailbox.style.border = "1px solid red";
+            mailboxTip.style.color = "red";
+            mailboxTip.innerHTML = "邮箱地址不能为空！";
+            return false;
+        }else if(eReg.test(mailboxStr)){
+            input_mailbox.style.border = "1px solid green";
+            mailboxTip.style.color = "green";
+            mailboxTip.innerHTML = "验证通过！";
+            return true;
+        }else{
+            input_mailbox.style.border = "1px solid red";
+            mailboxTip.style.color = "red";
+            mailboxTip.innerHTML = "邮箱地址不合法！";
+            return false;
+        }
+    }
+
+    function phoneBlur(){
+        var phoneReg = /^1\d{10}$/;
+        var phoneStr = input_phone.value;
+        if(phoneStr.length===0){
+            input_phone.style.border = "1px solid red";
+            phoneTip.style.color = "red";
+            phoneTip.innerHTML = "手机号码不能为空！";
+            return false;
+        }else if(phoneReg.test(phoneStr)){
+            input_phone.style.border = "1px solid green";
+            phoneTip.style.color = "green";
+            phoneTip.innerHTML = "验证通过!";
+            return true;
+        }else{
+            input_phone.style.border = "1px solid red";
+            phoneTip.style.color = "red";
+            phoneTip.innerHTML = "手机号码输入格式不合法！";
+            return false
+        }
+    }
+
+    function checkAll(){
+        var nameFlag = nameBlur();
+        var passwdFlag = passwdBlur();
+        var rePasswdFlag = rePasswdBlur();
+        var mailboxFlag = mailboxBlur();
+        var phoneFlag = phoneBlur();
+        if(nameFlag && passwdFlag && rePasswdFlag && mailboxFlag && phoneFlag){
+            alert("输入全部验证通过！");
+        }else{
+            alert("输入有错误，请检查！");
+        }
+    }
+
+
+
+    init();
+
+</script>
+</body>
+</html>

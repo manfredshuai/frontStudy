@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 008</title>
+    <style type="text/css">
+        *{
+            font-size: 24px;
+            font-family: 微软雅黑;
+            margin: 20px;
+        }
+        .aaa{
+            border-radius: 10px;
+        }
+        .reminder{
+            margin-left: 120px;
+        }
+    </style>
+</head>
+<body>
+<label>名称</label> <input type="text" id="content" class="aaa"/><input type="button" value="验证" id="contentVerify" onclick="correctVerify()"><br>
+<span class="reminder" id="reminder" style="color: grey; font-size: 18px">必填，长度为4-16个字符</span>
+<script type="text/javascript">
+
+
+    function correctVerify(){
+        var oSpan = document.getElementById('reminder');
+        var oText = document.getElementById('content');
+        alert(getStrLen(oText.value));
+        if(oText.value === ""){
+            oText.style.borderColor = 'red';
+            oSpan.innerHTML = "姓名不能为空！！！";
+            return;
+        }
+        if(getStrLen(oText.value)>=4 && getStrLen(oText.value)<=16){
+
+            oText.style.borderColor = 'green';
+            oSpan.innerHTML = "有效的输入！";
+        }else{
+            oText.style.borderColor = 'red';
+            oSpan.innerHTML = "姓名长度在4-16之间！";
+        }
+
+    }
+    function getStrLen(str) {
+       var len = 0;
+       for(var ch in str){
+           len++;
+       }
+       return len;
+    }
+/*    function getStrLen(str){
+        var enLen = 0;
+        var zhLen = 0;
+        for(var ch in str){
+            if(isASCII(ch)){
+                enLen ++;
+            }else{
+                zhLen ++;
+            }
+        }
+        //alert(enLen + zhLen*2);
+        return enLen + zhLen*2;
+    }
+
+    function isASCII(c){
+        return c.charCodeAt(0) <= 0xFF;
+    }*/
+
+</script>
+</body>
+</html>

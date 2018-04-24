@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 009</title>
+</head>
+<body>
+<ul id="source">
+    <li>北京空气质量：<span>90</span></li>
+    <li>上海空气质量：<span>95</span></li>
+    <li>天津空气质量：<span>93</span></li>
+    <li>广州空气质量：<span>92</span></li>
+    <li>深圳空气质量：<span>98</span></li>
+    <li>重庆空气质量：<span>89</span></li>
+    <li>成都空气质量：<span>85</span></li>
+    <li>昆明空气质量：<span>99</span></li>
+    <li>郑州空气质量：<span>78</span></li>
+</ul>
+<ul id="resort">
+
+</ul>
+<button id="sort-btn">排序</button>
+<script>
+    /**
+     * getData方法
+     * 读取id为source的列表获取其中的城市名及对应的空气质量指数
+     * 返回一个数组，
+     */
+    function  getData() {
+        var oSourceUl = document.getElementById('source');
+        var liArray = oSourceUl.getElementsByTagName('li');
+        var dataArray = [];
+        for(var i=0;i<liArray.length;i++){
+            var data = [];
+            var tempStr = liArray[i].innerHTML;
+            var city = tempStr.slice(0,tempStr.indexOf('空气'));
+            data.push(city);
+            var num = parseInt(liArray[i].getElementsByTagName('span')[0].innerHTML);
+            data.push(num);
+            dataArray.push(data);
+        }
+        return dataArray;
+    }
+
+    /**
+     * sortAqidata
+     * @param data
+     * 按照空气质量指数从大到小排列城市
+     * 冒泡法
+     */
+    function sortAqiData(data){
+        for(var i=0;i<data.length-1;i++){
+            for(var j=0; j<data.length-i-1;j++){
+                if(data[j][1]<data[j+1][1]){
+                    var temp = data[j];
+                    data[j] = data[j+1];
+                    data[j+1] = temp;
+                }
+            }
+        }
+        return data;
+    }
+    function render(data){
+        var oUlResort = document.getElementById("resort");
+        for(var i=0;i<data.length;i++){
+            var newLi = document.createElement('li');
+            newLi.innerHTML = data[i][0] + "空气质量：" + data[i][1];
+            oUlResort.appendChild(newLi);
+        }
+
+    }
+
+    function btnHandle(){
+        var aqiData = getData();
+        aqiData = sortAqiData(aqiData);
+        render(aqiData);
+
+    }
+     function init(){
+         var oBtn = document.getElementById('sort-btn');
+         oBtn.onclick = btnHandle;
+     }
+
+     init();
+</script>
+
+</body>
+</html>

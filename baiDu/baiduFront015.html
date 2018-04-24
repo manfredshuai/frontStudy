@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front Task 013</title>
+<style type="text/css">
+    .container{
+        width: 720px;
+        height: 300px;
+        border: 1px solid #9acfea;
+        margin-top: 10px;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    .container div{
+
+        float:left;
+        width: 10px;
+        background-color: red;
+        margin-right: 2px;
+    }
+</style>
+</head>
+<body>
+<label for="inputValue">请输入数字：</label><input id="inputValue" type="text"/>
+<button id="leftIn">左侧入</button>
+<button id="rightIn">右侧入</button>
+<span> &nbsp;&nbsp;&nbsp;&nbsp;</span>
+<button id="leftOut">左侧出</button>
+<button id="rightOut">右侧出</button>
+<div class="container" id="container">
+    <!--<div style="height: 40px"></div>
+    <div style="height: 50px"></div>
+    <div style="height: 60px"></div>
+    <div style="height: 70px"></div>-->
+</div>
+<button id="sortQueue">排序</button>
+<script type="text/javascript">
+    var oTxtInput = document.getElementById('inputValue');
+    var oBtnLeftIn = document.getElementById('leftIn');
+    var oBtnRightIn = document.getElementById('rightIn');
+    var oBtnLeftOut = document.getElementById('leftOut');
+    var oBtnRightOut = document.getElementById('rightOut');
+    var oBtnSortQueue = document.getElementById('sortQueue');
+    var oDivContainer = document.getElementById('container');
+
+
+    function getQueueNum(){
+        var divArrays = oDivContainer.getElementsByTagName('div');
+        var heightArray = [];
+        for(var i=0;i<divArrays.length;i++){
+            var divHeight = divArrays[i].style.height;
+            heightArray.push(parseInt(divHeight)/2);
+        }
+        return heightArray;
+    }
+
+    function renderGraphy(numArray){
+        oDivContainer.innerHTML = "";
+        //alert(numArray);
+        for(var i=0;i<numArray.length;i++){
+            var newDiv = document.createElement('div');
+            newDiv.style.height = numArray[i]*2 + "px";
+            newDiv.style.marginTop = 300 - numArray[i]*2 + "px";
+            oDivContainer.appendChild(newDiv);
+            oDivContainer.onclick = function(){
+                if(event.target){
+                    oDivContainer.removeChild(event.target);
+                }
+
+            }
+
+        }
+        var arrayDiv = oDivContainer.getElementsByTagName('div');
+    }
+
+    function getInputNum(){
+        var inputValue = oTxtInput.value;
+        if(inputValue ===""){
+            alert("请输入！");
+            return -1;
+        }else if(isNaN(inputValue)){
+            alert("请输入数字！");
+            return -1;
+        }else if(inputValue>100 || inputValue<10){
+            alert("请输入介于10-100（含）之间的数字");
+            return -1;
+        }else{
+            return inputValue;
+        }
+    }
+
+    function leftInClick(){
+        var numArray = getQueueNum();
+        inputNum = getInputNum();
+        if(inputNum ===-1){
+            oTxtInput.value ="";
+            return;
+        }else{
+            numArray.unshift(inputNum);
+            oTxtInput.value = "";
+            //alert(numArray);
+            renderGraphy(numArray);
+        }
+    }
+
+    function rightInClick(){
+        var numArray = getQueueNum();
+        inputNum = getInputNum();
+        if(inputNum ===-1){
+            oTxtInput.value = "";
+            return;
+        }else{
+            numArray.push(inputNum);
+            oTxtInput.value = "";
+            renderGraphy(numArray);
+        }
+    }
+
+    function leftOutClick(){
+        var numArray = getQueueNum();
+        alert(numArray.shift());
+        renderGraphy(numArray);
+        //alert(numArray);
+    }
+
+    function rightOutClick(){
+        var numArray = getQueueNum();
+        alert(numArray.pop());
+        renderGraphy(numArray);
+        //alert(numArray);
+    }
+
+    function queueSort(){
+        var queueNum = getQueueNum();
+        for(var i=0; i<queueNum.length-1; i++){
+            for(var j=0; j<queueNum.length-i-1;j++){
+                if(queueNum[j]>queueNum[j+1]){
+                    var temp = queueNum[j];
+                    queueNum[j] = queueNum[j+1];
+                    queueNum[j+1] = temp;
+                }
+            }
+        }
+        return queueNum;
+    }
+
+    function init(){
+
+        oBtnLeftIn.addEventListener('click', leftInClick);
+        oBtnRightIn.addEventListener('click', rightInClick);
+        oBtnLeftOut.addEventListener('click', leftOutClick);
+        oBtnRightOut.addEventListener('click', rightOutClick);
+        oBtnSortQueue.addEventListener('click', function(){
+            renderGraphy(queueSort(getQueueNum()));
+        })
+    }
+
+    init();
+
+
+
+</script>
+
+</body>
+</html>

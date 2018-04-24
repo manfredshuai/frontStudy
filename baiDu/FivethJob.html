@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE Javascript Task 05</title>
+    <style type="text/css">
+        .bars{
+            background-color: #cccccc;
+            margin-top: 10px;
+            position: relative;
+        }
+        .bars li{
+            float: left;
+            margin-left: 1px;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+<h1 style="margin-left: 40px">队列图形测试</h1>
+<p style="margin-left: 40px">
+    <input type="text" id="inputNum"/>
+</p>
+<div  style="margin-left: 40px" class="btn">
+    <button type="button" id="left-in" onclick="leftIn()">左侧入</button>
+    <button type="button" id="left-out" onclick="leftOut()">左侧出</button>
+    <button type="button" id="right-in" onclick="rightIn()">右侧入</button>
+    <button type="button" id="right-out" onclick="rightOut()">右侧出</button>
+    <button type="button" id="sort-height" onclick="sortByHeight()">排序</button>
+
+</div>
+<div class="bars">
+    <ul id="queue">
+       <!-- <li><div style="width: 20px;height: 20px;background-color: red"></div> </li>
+        <li><div style="width: 20px;height: 20px;background-color: red"></div> </li>
+        <li><div style="width: 20px;height: 20px;background-color: red"></div> </li>-->
+
+    </ul>
+</div>
+<script type="text/javascript">
+    var oQueue = document.getElementById('queue');
+    var inputNumber = document.getElementById('inputNum');
+
+    function getInputNum(){
+        /**
+         * 数据输入有效性校验
+         */
+        if(inputNumber.value ===''){
+            alert("请输入");
+            return "-1";
+        }else if(isNaN(inputNumber.value)){
+            alert("请输入数字！");
+            return "-1";
+        }else if(parseInt(inputNumber.value)<10||parseInt(inputNumber.value)>100){
+            alert("请输入10-100之间的数字！！！");
+            return "-1";
+        }else {
+            return parseInt(inputNumber.value);
+        }
+    }
+    function leftIn(){
+        if(oQueue.getElementsByTagName('li').length>30){
+            alert("队列元素最多为30个！");
+            inputNumber.value = "";
+            return;
+        }
+        var inputNum = getInputNum();
+        if(inputNum === '-1'){
+            inputNumber.value ="";
+            return;
+        }else{
+            var newLi = document.createElement('li');
+
+            var newDiv = document.createElement('div');
+            newDiv.style.width = 20 + "px";
+            newDiv.style.height = 2 * inputNum + "px";
+            newDiv.style.marginTop = 200 - 2*inputNum + "px";
+            newDiv.style.backgroundColor = "red";
+            newLi.appendChild(newDiv);
+            var oLis = oQueue.getElementsByTagName('li');
+            if(oLis.length===0){
+                oQueue.appendChild(newLi);
+                newLi.onclick = function () {
+                    alert(inputNum);
+                    newLi.parentNode.removeChild(newLi);
+                };
+            }else{
+                oQueue.insertBefore(newLi,oLis[0]);
+            }
+        }
+    }
+    function rightIn() {
+        if(oQueue.getElementsByTagName('li').length>30){
+            alert("队列元素最多为30个！");
+            inputNumber.value = "";
+            return;
+        }
+        var inputNum = getInputNum();
+        if (inputNum === '-1') {
+            inputNumber.value = "";
+            return;
+        } else {
+            var newLi = document.createElement('li');
+            var newDiv = document.createElement('div');
+            newDiv.style.width = 20 + "px";
+            newDiv.style.height = 2 * inputNum + "px";
+            newDiv.style.marginTop = 200 - 2*inputNum + "px";
+            newDiv.style.backgroundColor = "red";
+            newLi.appendChild(newDiv);
+            oQueue.appendChild(newLi);
+            oQueue.appendChild(newLi);
+            newLi.onclick = function () {
+                alert(inputNum);
+                newLi.parentNode.removeChild(newLi);
+            };
+        }
+    }
+    function leftOut() {
+        var firstLi = oQueue.getElementsByTagName('li')[0];
+        firstLi.parentNode.removeChild(firstLi);
+    }
+    function rightOut(){
+        var lastLi =oQueue.getElementsByTagName('li')[oQueue.getElementsByTagName('li').length-1];
+        lastLi.parentNode.removeChild(lastLi);
+    }
+    function sortByHeight(){
+        //alert("排序");
+        var arrayOfHeight = [];
+        var liList = oQueue.getElementsByTagName('li');
+        //alert(liList.length);
+        for(var i=0;i<liList.length;i++){
+            var oDiv = liList[i].getElementsByTagName('div')[0];
+            //alert(parseInt(oDiv.style.height)/2);
+            arrayOfHeight.push(parseInt(oDiv.style.height)/2);
+            //alert(arrayOfHeight);
+        }
+        //arrayOfHeight.sort();
+        arraySort(arrayOfHeight);
+        oQueue.innerHTML = "";
+        /*while(oQueue.hasChildNodes()){
+            oQueue.removeChild(oQueue.firstChild);
+        }*/
+        alert(arrayOfHeight);
+        for(var j=0;j<arrayOfHeight.length;j++){
+            //alert(arrayOfHeight[j]);
+            var newLi = document.createElement('li');
+            var newDiv = document.createElement('div');
+            newDiv.style.width = 20 + "px";
+            newDiv.style.height = 2 * arrayOfHeight[j] + "px";
+            newDiv.style.marginTop = 200 - 2*arrayOfHeight[j] + "px";
+            newDiv.style.backgroundColor = "green";
+            newLi.appendChild(newDiv);
+            oQueue.appendChild(newLi);
+            newLi.onclick = function () {
+                this.parentNode.removeChild(this);
+            }
+
+        }
+        function arraySort(listNum){
+            for(var i=0;i<listNum.length-1;i++){
+                for(var j=0;j<listNum.length-i;j++){
+                    var temp;
+                    if(listNum[j+1]<listNum[j]){
+                        temp = listNum[j+1];
+                        listNum[j+1] = listNum[j];
+                        listNum[j] = temp;
+                    }
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baidu Front 004</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Arial "微软雅黑";
+        }
+        body{
+            background-color: rgb(222,222,222);
+        }
+        nav{
+            width: 100%;
+            height:60px;
+            background-color: rgb(51,51,51);
+            position: relative;/*相对定位，相对于父容器而言。这个时候不能用top left定位，应该用margin*/
+            overflow: hidden; /*overflow定义当内容溢出容器的时候发生的情况*/
+                              /*hidden表示内容会被修剪，并且其余内容是不可见的*/
+        }
+        nav h1{
+            width: 20%;
+            height: 60px;
+            position:absolute;/*绝对定位，相对于父容器而言，可以用top lef定位*/
+            left:0;
+            top:0;
+            line-height: 60px;/*字体行高*/
+        }
+        nav ul{
+            width: 30%;
+            height: 60px;
+            position: absolute;
+            top:0;
+            right: 0;
+            line-height: 60px;
+        }
+        nav ul li{
+            float: left;
+            margin-left: 30px;
+        }
+        div{
+            background-color: rgb(255,255,255);
+            width: 95%;
+            position: relative;
+            margin: 20px;
+            box-shadow: 0px 0px 5px black;
+        }
+        ul{
+            margin: auto;
+        }
+
+    </style>
+</head>
+<body>
+<nav>
+    <h1>网站一级标题</h1>
+    <ul>
+        <li>导航链接一</li>
+        <li>导航链接二</li>
+        <li>导航链接三</li>
+        <li>导航链接四</li>
+    </ul>
+</nav>
+<div>
+    <h1>文章一级标题</h1>
+    <h2>文章二级标题</h2>
+    <p>文章作者 文章发表时间</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是<a href="www.baiducom">这里有点链接到www.baidu.com</a>
+        一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <div>
+        <img src="http://i.guancha.cn/news/2018/04/06/20180406083513231.jpg">
+    </div>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是<a href="www.baiducom">这里有点链接到www.baidu.com</a>
+        一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+
+</div>
+<div>
+    <h1>另一篇文章的一级标题</h1>
+    <h2>文章二级标题</h2>
+    <p>文章作者 文章发表时间</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <p>这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是<a href="www.baiducom">这里有点链接到www.baidu.com</a>
+        一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落这是一个很长的段落<br>换行了</p>
+    <ul>
+        <li>列表项目1</li>
+        <li>列表项目2</li>
+        <li>列表项目3</li>
+        <li>列表项目4</li>
+    </ul>
+    <h2>图片</h2>
+    <div>
+        <p>好看的图片</p>
+        <img src="http://i.guancha.cn/news/2018/04/06/20180406083513231.jpg">
+    </div>
+    <div>
+        <p>好看的图片</p>
+        <img src="http://i.guancha.cn/news/2018/04/06/20180406083513231.jpg">
+    </div>
+    <div>
+        <p>好看的图片</p>
+        <img src="http://i.guancha.cn/news/2018/04/06/20180406083513231.jpg">
+    </div>
+    <div>
+        <p>好看的图片</p>
+        <img src="http://i.guancha.cn/news/2018/04/06/20180406083513231.jpg">
+    </div>
+    <div>
+        <p>好看的图片</p>
+        <img src="http://i.guancha.cn/news/2018/04/06/20180406083513231.jpg">
+    </div>
+</div>
+<div>
+    <h1>最后一篇文章一级标题</h1>
+    <h2>文章二级标题</h2>
+    <p>文章作者 文章发表时间</p>
+    <ul>
+        <li>排名1</li>
+        <li>排名2</li>
+        <li>排名3</li>
+        <li>排名4</li>
+    </ul>
+    <P>下面是一个表格，给表格加了一个border=1好让你看出来是一个表格</P>
+    <table border="solid 1px">
+        <tr>
+            <th>表头</th>
+            <th>表头</th>
+            <th>表头</th>
+        </tr>
+        <tr>
+            <td>表内容单元格</td>
+            <td>表内容单元格</td>
+            <td>表内容单元格</td>
+        </tr>
+        <tr>
+            <td>表内容单元格</td>
+            <td>表内容单元格</td>
+            <td>表内容单元格</td>
+        </tr>
+        <tr>
+            <td>表内容单元格</td>
+            <td>表内容单元格</td>
+            <td><a href="">操作</a></td>
+        </tr>
+    </table>
+    <h2><span></span>这里是侧栏的标题</h2>
+    <h2>侧柱栏注册窗口标题</h2>
+    <label>请输入邮箱地址：</label><input type="text" value="这是一个文本输入框"/><br>
+    <label>邮箱地址请按照要求格式输入</label><br>
+    <label>请输入你的密码：</label><input type="password"/><label>请重复输入密码</label><input type="password"/><br>
+    <label>密码未6-16位数字</label><br>
+    <div>
+        <span>性别：</span>
+        <input type="radio" checked="checked" name="gender"/>男
+        <input type="radio" name="gender"/>女<br>
+        <span>城市</span>
+        <select>
+            <option>北京</option>
+            <option>上海</option>
+            <option>天津</option>
+            <option>广州</option>
+            <option>深圳</option>
+            <option>珠海</option>
+        </select>
+        <span>爱好</span>
+        <input type="checkbox"/>运动
+        <input type="checkbox"/>艺术
+        <input type="checkbox"/>科学
+        <span>个人描述</span>
+        <textarea placeholder="这是一个多行输入框，输入你的爱好"></textarea>
+    </div>
+</div>
+
+</body>
+</html>
